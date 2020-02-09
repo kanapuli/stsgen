@@ -1,8 +1,10 @@
+use std::error::Error;
 use std::fmt;
+use std::io::Error as IoError;
 
 #[derive(Debug)]
 pub struct CredentialsError {
-    message: String,
+    pub message: String,
 }
 
 impl CredentialsError {
@@ -16,5 +18,11 @@ impl CredentialsError {
 impl fmt::Display for CredentialsError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.message.to_string())
+    }
+}
+
+impl From<IoError> for CredentialsError {
+    fn from(err: IoError) -> CredentialsError {
+        CredentialsError::new(err.description())
     }
 }
