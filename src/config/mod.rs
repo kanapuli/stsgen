@@ -14,7 +14,8 @@ mod tests {
     use super::*;
     #[test]
     fn check_config_env_var() {
-        let result = get_config_env();
+        let env_var = "AWS_CREDS_FILE_PATH";
+        let result = get_config_env(env_var);
         match result {
             Ok(val) => {
                 println!("{}", val);
