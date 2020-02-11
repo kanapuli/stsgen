@@ -61,7 +61,7 @@ pub fn parse_credentials_file(
         }
         //println!("{}", unwrapped_line);
         if profile_regex.is_match(&unwrapped_line) {
-            if profile_name.is_some() && access_key_id.is_some() && secret_access_key.is_some() {
+            if  profile_name.is_some() && access_key_id.is_some() && secret_access_key.is_some() {
                 let credentials =
                     AwsCredentials::new(access_key_id.unwrap(), secret_access_key.unwrap());
                 profiles.insert(profile_name.unwrap(), credentials);
@@ -69,8 +69,9 @@ pub fn parse_credentials_file(
         }
         access_key_id = None;
         secret_access_key = None;
+        profile_name = None;
     }
-    println!("{:?}", profiles);
+    //    println!("{:?}", profiles);
     Err(CredentialsError {
         message: "Hello".to_string(),
     })
